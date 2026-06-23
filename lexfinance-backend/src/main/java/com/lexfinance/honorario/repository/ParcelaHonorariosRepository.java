@@ -44,4 +44,7 @@ public interface ParcelaHonorariosRepository extends JpaRepository<ParcelaHonora
     );
 
     long countByStatusAndDataVencimentoBefore(StatusParcela status, LocalDate date);
+
+    @Query(value = "SELECT * FROM parcelas_honorarios WHERE contrato_id = :contratoId ORDER BY numero_parcela", nativeQuery = true)
+    List<ParcelaHonorarios> findByContratoId(@Param("contratoId") UUID contratoId);
 }
