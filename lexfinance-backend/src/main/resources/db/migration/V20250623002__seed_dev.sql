@@ -19,7 +19,7 @@ VALUES (
     '550e8400-e29b-41d4-a716-446655440000',
     'Administrador LexFinance',
     'admin@lexfinance.dev',
-    '$2a$10$slYQmyNdGzin7olVN3p5Be7DlH.PKZbv5H8KnzzVgXXbVxzy990qm',
+    '$2a$10$zBeorUpq5pt2X/eviYXMHOoKFmccTDiMcs.EpeXdfLBeVW4zI8HFe',
     TRUE,
     '2026-01-01 08:30:00',
     '2026-01-01 08:30:00'
