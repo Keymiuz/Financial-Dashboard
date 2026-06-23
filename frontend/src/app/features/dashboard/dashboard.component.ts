@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
+import { Router, NavigationEnd } from '@angular/router';
+import { Subscription, filter } from 'rxjs';
 
 interface ResumoResponse {
   aReceber: number;
@@ -117,7 +119,7 @@ interface FluxoCaixaItem {
     </div>
   `
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
   resumo: ResumoResponse = {
     aReceber: 0,
     emAtraso: 0,
@@ -126,12 +128,25 @@ export class DashboardComponent implements OnInit {
   };
 
   fluxoCaixa: FluxoCaixaItem[] = [];
+  private routerSub?: Subscription;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit() {
     this.fetchResumo();
     this.fetchFluxoCaixa();
+
+    // Recarrega os dados toda vez que o usuário navega de volta para o dashboard
+    this.routerSub = this.router.events
+      .pipe(filter(e => e instanceof NavigationEnd && e.urlAfterRedirects.includes('/dashboard')))
+      .subscribe(() => {
+        this.fetchResumo();
+        this.fetchFluxoCaixa();
+      });
+  }
+
+  ngOnDestroy() {
+    this.routerSub?.unsubscribe();
   }
 
   fetchResumo() {
