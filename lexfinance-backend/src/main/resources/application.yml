@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: lexfinance-backend
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/lexfinance}
+    username: ${DB_USERNAME:lexfinance}
+    password: ${DB_PASSWORD:lexfinance}
+    driver-class-name: org.postgresql.Driver
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+# Configurações customizadas do LexFinance
+app:
+  jwt:
+    secret: ${JWT_SECRET:dGhpcy1pcy1hLXZlcnktc2VjdXJlLWFuZC1sb25nLWJhc2U2NC1lbmNvZGVkLXNlY3JldC1mb3ItZGV2ZWxvcG1lbnQtcHVycG9zZXM=} # Default de dev em base64
+    expiration-ms: ${JWT_EXPIRATION_MS:900000} # 15 minutos
+    refresh-expiration-ms: ${JWT_REFRESH_EXPIRATION_MS:604800000} # 7 dias
+  tenant-id-fixo: ${APP_TENANT_ID_FIXO:00000000-0000-0000-0000-000000000000} # Default de dev
