@@ -88,6 +88,6 @@ export class AuthService {
     localStorage.setItem(this.TENANT_ID_KEY, response.tenantId);
     
     // MVP uses a hardcoded tenant name for simplicity
-    localStorage.setItem(this.TENANT_NAME_KEY, 'LexFinance Advocacia e Associados');
+    localStorage.setItem(this.TENANT_NAME_KEY, 'AdFinance Advocacia e Associados');
   }
 }

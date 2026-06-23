@@ -12,7 +12,7 @@ import { AuthService } from '../../../core/services/auth.service';
     <div class="login-container">
       <div class="login-card animate-fade-in">
         <div class="login-header">
-          <div class="login-logo">LexFinance</div>
+          <div class="login-logo">AdFinance</div>
           <p class="login-subtitle">Acesse o financeiro do seu escritório</p>
         </div>
 

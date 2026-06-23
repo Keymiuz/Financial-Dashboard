@@ -12,7 +12,7 @@ import { AuthService } from '../../core/services/auth.service';
       <!-- Sidebar -->
       <aside class="sidebar">
         <div class="sidebar-brand">
-          <h1>LexFinance</h1>
+          <h1>AdFinance</h1>
         </div>
         <nav class="sidebar-nav">
           <a routerLink="/dashboard" routerLinkActive="nav-item-active" class="nav-item">
@@ -67,9 +67,11 @@ export class MainLayoutComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
-    this.userName = this.authService.getUserName() || 'Usuário';
+    this.userName = (this.authService.getUserName() || 'Usuário').replace(/LexFinance/gi, 'AdFinance');
     this.userEmail = this.authService.getUserEmail() || '';
-    this.tenantName = this.authService.getTenantName() || 'Escritório Padrão';
+    const rawName = this.authService.getTenantName() || 'Escritório Padrão';
+    // Normalize any lingering "LexFinance" from old login sessions
+    this.tenantName = rawName.replace(/LexFinance/gi, 'AdFinance');
   }
 
   getPageTitle(): string {
@@ -77,7 +79,7 @@ export class MainLayoutComponent implements OnInit {
     if (url.includes('/dashboard')) return 'Dashboard Financeiro';
     if (url.includes('/clientes')) return 'Cadastro de Clientes';
     if (url.includes('/processos')) return 'Processos Judiciais';
-    return 'LexFinance';
+    return 'AdFinance';
   }
 
   logout() {
